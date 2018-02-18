@@ -4,3 +4,15 @@ select name from students where marks>75 order by right(name,3),id
 
 --to replace all NULL values with 0
 select isnull(marks,0) from student
+
+--checking for type of triangle
+select case
+          when A+B>C and B+C>A and A+C>B then 
+          case
+          when A=B and B=C then 'Equilateral'
+          when A=B or B=C or A=C then 'Isosceles'
+          when A!=B and B!=C and A!=C then 'Scalene'
+          end
+          else 'Not A Triangle'
+       end
+from triangles     
