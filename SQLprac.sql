@@ -16,3 +16,7 @@ select case
           else 'Not A Triangle'
        end
 from triangles     
+
+--to assign sequence numbers
+select ROW_NUMBER() over(order by firstname) as Seq,FirstName,LastName from Person.Person 
+where FirstName like '%ss%';
