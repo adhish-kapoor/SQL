@@ -20,3 +20,6 @@ from triangles
 --to assign sequence numbers
 select ROW_NUMBER() over(order by firstname) as Seq,FirstName,LastName from Person.Person 
 where FirstName like '%ss%';
+
+--to assign rank according to marks
+select *,(select count(*) from student si where si.marks>=so.marks) as ranking from student so
