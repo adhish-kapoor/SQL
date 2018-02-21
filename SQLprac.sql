@@ -31,8 +31,13 @@ FROM
 FROM Purchasing.PurchaseOrderHeader) p
 PIVOT
 (
-COUNT (PurchaseOrderID)
+COUNT (PurchaseOrderID) --function(<data column>)
 FOR EmployeeID IN
-( [250], [251], [256], [257], [260] )
+( [250], [251], [256], [257], [260] ) --list of pivoted columns
 ) AS pvt
 ORDER BY pvt.VendorID;
+
+--Use of OFFSET to fetch next rows
+Select name,age from student order by name
+OFFSET 20 --will start from 21
+FETCH next 10 rows only; --end at 30
