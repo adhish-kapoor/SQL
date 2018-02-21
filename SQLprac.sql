@@ -41,3 +41,9 @@ ORDER BY pvt.VendorID;
 Select name,age from student order by name
 OFFSET 20 --will start from 21
 FETCH next 10 rows only; --end at 30
+
+--last day of the month in yyyy-mm-dd format
+select EOMONTH(GETDATE());
+--Searching string inside another
+select CHARINDEX('Adhish','My name is adhish') --returns 12 position of 'a'
+select CHARINDEX('Adi','My name is adhish') --returns 0 as Adi is not found
