@@ -47,3 +47,5 @@ select EOMONTH(GETDATE());
 --Searching string inside another
 select CHARINDEX('Adhish','My name is adhish') --returns 12 position of 'a'
 select CHARINDEX('Adi','My name is adhish') --returns 0 as Adi is not found
+--for choosing an item
+select choose(2,'abc','def','ghi') --returns def
