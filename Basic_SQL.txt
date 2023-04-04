@@ -1,0 +1,101 @@
+--display name of students by sorting last 3 characters
+--if 3 characters are same then sort by their ID's
+select name from students where marks>75 order by right(name,3),id 
+
+--to replace all NULL values with 0
+select isnull(marks,0) from student
+
+--checking for type of triangle
+select case
+          when A+B>C and B+C>A and A+C>B then 
+          case
+          when A=B and B=C then 'Equilateral'
+          when A=B or B=C or A=C then 'Isosceles'
+          when A!=B and B!=C and A!=C then 'Scalene'
+          end
+          else 'Not A Triangle'
+       end
+from triangles     
+
+--to assign sequence numbers
+select ROW_NUMBER() over(order by firstname) as Seq,FirstName,LastName from Person.Person 
+where FirstName like '%ss%';
+
+--to assign rank according to marks
+select *,(select count(*) from student si where si.marks>=so.marks) as ranking from student so
+
+--PIVOT is used to convert row data into columns
+SELECT * --VendorID, [250] AS Emp1, [251] AS Emp2, [256] AS Emp3, [257] AS Emp4, [260] AS Emp5
+FROM 
+(SELECT PurchaseOrderID, EmployeeID, VendorID
+FROM Purchasing.PurchaseOrderHeader) p
+PIVOT
+(
+COUNT (PurchaseOrderID) --function(<data column>)
+FOR EmployeeID IN
+( [250], [251], [256], [257], [260] ) --list of pivoted columns
+) AS pvt
+ORDER BY pvt.VendorID;
+
+--Use of OFFSET to fetch next rows
+Select name,age from student order by name
+OFFSET 20 --will start from 21
+FETCH next 10 rows only; --end at 30
+
+--last day of the month in yyyy-mm-dd format
+select EOMONTH(GETDATE());
+--Searching string inside another
+select CHARINDEX('Adhish','My name is adhish') --returns 12 position of 'a'
+select CHARINDEX('Adi','My name is adhish') --returns 0 as Adi is not found
+--for choosing an item
+select choose(2,'abc','def','ghi') --returns def
+
+ --COALESCE function returns first non-null expression in a list
+               SELECT COALESCE(NULL, 1, 2, 'A.com'); --returns 1
+               
+              ====================
+Q1 What are Constraints in SQL?
+- Constraints are used to specify the rules concerning data in the table. 
+It can be applied for single or multiple fields in an SQL table during the creation of the table or after creating using the ALTER TABLE command.
+
+NOT NULL - Restricts NULL value from being inserted into a column.
+CHECK - Verifies that all values in a field satisfy a condition.
+DEFAULT - Automatically assigns a default value if no value has been specified for the field.
+UNIQUE - Ensures unique values to be inserted into the field.
+INDEX - Indexes a field providing faster retrieval of records.
+PRIMARY KEY - Uniquely identifies each record in a table.
+FOREIGN KEY - Ensures referential integrity for a record in another table.
+
+Q2 What is an Index?
+- A database index is a data structure that provides a quick lookup of data in a column or columns of a table. 
+It enhances the speed of operations accessing data from a database table at the cost of additional writes and memory to maintain the index data structure.
+
+CREATE INDEX index_name   /* Create Index */
+ON table_name (column_1, column_2);
+DROP INDEX index_name;   /* Drop Index */
+
+Q3 What is the difference between Clustered and Non-clustered index?
+- Clustered index modifies the way records are stored in a database based on the indexed column. 
+A non-clustered index creates a separate entity within the table which references the original table.
+
+Clustered index is used for easy and speedy retrieval of data from the database, whereas, 
+fetching records from the non-clustered index is relatively slower.
+
+In SQL, a table can have a single clustered index whereas it can have multiple non-clustered indexes.
+
+Q4 What is an Alias in SQL?
+- An alias is a feature of SQL that is supported by most, if not all, RDBMSs. 
+It is a temporary name assigned to the table or table column for the purpose of a particular SQL query.
+In addition, aliasing can be employed as an obfuscation technique to secure the real names of database fields. 
+A table alias is also called a correlation name.
+
+Q5 What is the difference between DELETE and TRUNCATE statements?
+- The TRUNCATE command is used to delete all the rows from the table and free the space containing the table.
+The DELETE command deletes only the rows from the table based on the condition given in the where clause or 
+deletes all the rows from the table if no condition is specified. But it does not free the space containing the table.
+
+
+
+
+               
+               
