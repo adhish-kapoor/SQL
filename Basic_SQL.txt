@@ -94,6 +94,10 @@ Q5 What is the difference between DELETE and TRUNCATE statements?
 The DELETE command deletes only the rows from the table based on the condition given in the where clause or 
 deletes all the rows from the table if no condition is specified. But it does not free the space containing the table.
 
+Q6 RANK() and DENSE_RANK()
+- RANK skips the number of positions after records with the same rank number.
+DENSE_RANK doesn’t skip records with the same rank number.
+
 
 
 
